@@ -12,48 +12,45 @@ from ..models import Models
 load_dotenv()
 
 Agiflow.init(
-  app_name="summary-agents",
+  app_name="crewai-hierarchical-agents",
 )
 
+manager_model = Models.get()
 agents = ProductTeamAgents()
-lead_developer_agent = agents.lead_developer_agent()
-developer_agent = agents.senior_developer_agent()
+developer_agent = agents.developer_agent()
 product_manager_agent = agents.product_manager()
 developerTasks = DeveloperTasks()
 productManagerTasks = ProductManagerTasks()
 
-@workflow(name="Changelog")
+@workflow(name="CrewAI Hirarchical")
 def run():
 
     print("## Welcome to the Product Crew")
     print('-------------------------------')
     changelog_url = 'https://github.com/langchain-ai/langchain/releases' # input("What is the product website you want a marketing strategy for?\n")
 
-    changelog_analysis = developerTasks.changelog_analysis(lead_developer_agent)
+    changelog_analysis = developerTasks.changelog_analysis(developer_agent)
     changelog_review = developerTasks.changelog_review(developer_agent)
     stories_backlog = productManagerTasks.stories_backlog(product_manager_agent)
 
     # Create Crew responsible for Copy
     product_crew = Crew(
         agents=[
-            lead_developer_agent,
-            developer_agent,
-            product_manager_agent
+            developer_agent
         ],
         tasks=[
             changelog_analysis,
             changelog_review,
             stories_backlog,
         ],
-        manager_agent=None,
-        manager_llm=Models.get(),
+        manager_agent=product_manager_agent,
         process=Process.hierarchical,
         verbose=True,
     )
 
     product_update = product_crew.kickoff({
         "changelog_url": changelog_url,
-        "root": os.path.join(Path(os.getcwd()).resolve().parent, 'langchain-chatbot'),
+        "working_dir": os.path.join(Path(os.getcwd()).resolve().parent, 'langchain-chatbot'),
     })
 
     # Print results

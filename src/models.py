@@ -3,6 +3,10 @@ from langchain_community.chat_models.azure_openai import AzureChatOpenAI
 from langchain.llms import Ollama
 from langchain_openai import ChatOpenAI
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 class Models:
     @lru_cache
@@ -18,10 +22,11 @@ class Models:
     @lru_cache
     @staticmethod
     def azure():
+        os.environ['OPENAI_API_VERSION'] = os.environ.get('AZURE_OPENAI_API_VERSION')
         return AzureChatOpenAI(
             openai_api_key=os.environ.get('AZURE_OPENAI_API_KEY'),
             openai_api_version=os.environ.get('AZURE_OPENAI_API_VERSION'),
-            azure_endpoint=os.environ.get('AZURE_ENDPOINT'),
+            azure_endpoint=os.environ.get('AZURE_OPENAI_ENDPOINT'),
             azure_deployment=os.environ.get('AZURE_DEPLOYMENT'),
         )
 

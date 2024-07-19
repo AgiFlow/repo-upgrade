@@ -41,14 +41,15 @@ class Changelog():
     @tool
     def latest_changes(url: str):
         """
-            Get latest changes from library changelog.
+            Get latest changes from changelog url.
             :param str url: The url of the web page
         """
         url = url.replace('"', '')
         with sync_playwright() as playwright:
             chromium = playwright.chromium
-            browser = chromium.launch(headless=True)
-            page = browser.new_page()
+            browser = chromium.launch(headless=False)
+            context = browser.new_context()
+            page = context.new_page()
             page.goto(url)  # Navigate to the old url
             html = page.content()
 
@@ -60,7 +61,7 @@ class Changelog():
                 body = ele.find(lambda tag: tag.name=='div' and tag.has_attr('data-test-selector') and tag['data-test-selector']=="body-content")
                 changes = []
                 for mes_ele in body.find_all('p'):
-                    changes.append(Changelog.get_pr_info(mes_ele, browser))
+                    changes.append(Changelog.get_pr_info(mes_ele, context))
 
                 releases.append({
                     'package': package,
@@ -77,7 +78,7 @@ class Repo():
     @tool
     def read_dependencies(root):
         """
-            List dependencies from package manager file
+            List dependencies' versions from working repository
             :param str root: The root directory of the project
         """
         dependencies_fnames = ['pyproject.toml', 'requirements.txt']
@@ -99,7 +100,7 @@ class Repo():
     @tool
     def read_source_codes(root):
         """
-            List source codes with content
+            List source codes with content from working repository
             :param str root: The root directory of the project
         """
         codes = []
@@ -114,3 +115,14 @@ class Repo():
                             "content": content,
                         })
         return codes
+
+    @staticmethod
+    @tool
+    def read_repo(root):
+        """
+            List source codes and dependencies from working repository
+            :param str root: The root directory of the project
+        """
+        dependencies = Repo.read_dependencies(root)
+        codes = Repo.read_source_codes(root)
+        return dependencies + codes

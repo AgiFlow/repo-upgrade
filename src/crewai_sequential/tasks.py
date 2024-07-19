@@ -13,8 +13,7 @@ class DeveloperTasks:
                 - Function arguments and key arguments changes
                 - Function return changes
 
-                Keep in mind, attention to detail is crucial for
-                a comprehensive story.
+                Keep in mind, attention to detail is crucial for a comprehensive story.
                 """),
             expected_output=dedent(f"""\
                 Your final summary must include a list of items and a title.
@@ -32,11 +31,11 @@ class DeveloperTasks:
     def changelog_review(self, agent):
         return Task(
             description=dedent("""\
-                From previous changelog summary, analyse codes and dependencies in {root}
+                From previous changelog summary, analyse codes and dependencies in {working_dir}
                 to determine whether update is neccessary.
 
                 You need to check if dependencies need to be updated first. Example of dependecies upgrade needed:
-                - Current version in requirements.txt is smaller than latest library version
+                - Current version is smaller than latest library version
 
                 For each dependency upgrade; check if code changes is needed. Example of code changes needed:
                 - Function arguments and keyed arguments from new library version are updated as well.

@@ -47,4 +47,5 @@ requires = [ "poetry-core" ]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-crewai = "src.crewai.main:run"
+crewai_hierarchical = "src.crewai_hierarchical.main:run"
+crewai_sequential = "src.crewai_sequential.main:run"
