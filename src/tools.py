@@ -1,6 +1,7 @@
 from playwright.sync_api import sync_playwright
 from bs4 import BeautifulSoup
 from langchain.tools import tool
+from agiflow.opentelemetry import tool as agitool
 import os
 
 class Changelog():
@@ -39,6 +40,7 @@ class Changelog():
 
     @staticmethod
     @tool
+    @agitool(name='latest_changes')
     def latest_changes(url: str):
         """
             Get latest changes from changelog url.
@@ -47,7 +49,7 @@ class Changelog():
         url = url.replace('"', '')
         with sync_playwright() as playwright:
             chromium = playwright.chromium
-            browser = chromium.launch(headless=False)
+            browser = chromium.launch(headless=True)
             context = browser.new_context()
             page = context.new_page()
             page.goto(url)  # Navigate to the old url
@@ -76,6 +78,7 @@ class Repo():
 
     @staticmethod
     @tool
+    @agitool(name='read_dependencies')
     def read_dependencies(root):
         """
             List dependencies' versions from working repository
@@ -98,6 +101,7 @@ class Repo():
 
     @staticmethod
     @tool
+    @agitool(name='read_source_codes')
     def read_source_codes(root):
         """
             List source codes with content from working repository
@@ -118,6 +122,7 @@ class Repo():
 
     @staticmethod
     @tool
+    @agitool(name='read_repo')
     def read_repo(root):
         """
             List source codes and dependencies from working repository

@@ -32,6 +32,8 @@ playwright = "^1.45.0"
 langgraph = "^0.1.8"
 crewai = "^0.36.1"
 langchain = "^0.2.7"
+langchain-community = "^0.2.7"
+langchain-openai = "^0.1.17"
 
 [tool.poetry.group.dev.dependencies]
 autopep8 = "2.0.4"
@@ -49,3 +51,4 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry.scripts]
 crewai_hierarchical = "src.crewai_hierarchical.main:run"
 crewai_sequential = "src.crewai_sequential.main:run"
+langgraph = "src.langgraph.main:run"
