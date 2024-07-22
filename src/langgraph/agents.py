@@ -1,6 +1,7 @@
 import json
 from langgraph.graph import MessagesState
 from langchain_core.messages import SystemMessage, ToolMessage
+from agiflow.opentelemetry import agent
 from ..tools import Repo, Changelog
 from ..models import Models
 
@@ -8,6 +9,7 @@ class ProductTeamAgents:
     def __init__(self):
         self.llm = Models.get_latest()
 
+    @agent(name='Lead Developer Agent')
     def lead_developer_agent(self, state: MessagesState):
         print('******************** lead developer')
         llm = Models.get_latest().bind_tools([Changelog.latest_changes])
@@ -42,10 +44,13 @@ class ProductTeamAgents:
         ] + messages
         if messages[-1] and isinstance(messages[-1], ToolMessage):
             messages[-1].content = json.dumps(messages[-1].content)
+        print(messages[-1])
         response = llm.invoke(messages)
+        print(response)
         # We return a list, because this will get added to the existing list
         return {"messages": [response]}
 
+    @agent(name='Senior Developer Agent')
     def senior_developer_agent(self, state: MessagesState):
         print('******************** senior developer')
         llm = Models.get_latest().bind_tools([Repo.read_dependencies, Repo.read_source_codes])
@@ -89,10 +94,13 @@ class ProductTeamAgents:
         for message in messages:
             if isinstance(message, ToolMessage):
                 message.content = json.dumps(message.content)
+        print(messages[-1])
         response = llm.invoke(messages)
+        print(response)
         # We return a list, because this will get added to the existing list
         return {"messages": [response]}
 
+    @agent(name='Product Manager Agent')
     def product_manager(self, state: MessagesState):
         print('******************** product manager')
         messages = state['messages']
@@ -132,6 +140,8 @@ class ProductTeamAgents:
         if messages[-1] and isinstance(messages[-1], ToolMessage):
             messages[-1].content = json.dumps(messages[-1].content)
 
+        print(messages[-1])
         response = self.llm.invoke(messages)
+        print(response)
         # We return a list, because this will get added to the existing list
         return {"messages": [response]}

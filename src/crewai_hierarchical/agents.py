@@ -9,7 +9,7 @@ class ProductTeamAgents:
 
     def developer_agent(self):
         return Agent(
-            role="Senior Developer",
+            role="Developer",
             goal=dedent("""\
                 Analysising code base, plan and decide where code change
                 is needed or not."""),

@@ -35,7 +35,8 @@ class DeveloperTasks:
                 Get dependencies and codes in {working_dir} directory to determine whether update is neccessary.
 
                 From Changelog Summary (if your product manager doesn't provide it to you, ask him to provide Changelog Summary),
-                you will need to validate whether dependencies needs upgrade or source codes requires change.
+                you will need to validate whether dependencies needs upgrade
+                or source codes requires change.
 
                 # 1. Check if dependencies need to be upgrade. Example of dependecies upgrade needed:
                 - Current version is smaller than latest library version
