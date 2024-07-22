@@ -34,10 +34,17 @@ class DeveloperTasks:
                 From previous changelog summary, analyse codes and dependencies in {working_dir}
                 to determine whether update is neccessary.
 
-                You need to check if dependencies need to be updated first. Example of dependecies upgrade needed:
+                # You MUST only use one tool at a time and perform these steps in sequence:
+
+                # 1. FIRST, check if dependencies need to be upgrade from workfing directory. Example of dependecies upgrade needed:
                 - Current version is smaller than latest library version
 
-                For each dependency upgrade; check if code changes is needed. Example of code changes needed:
+                # 2. SECOND, filter down dependencies to be upgraded from dependencies information.
+                - Function arguments and keyed arguments from new library version are updated as well.
+
+                # 3. THIRD, from filtered dependencies upgrades, use tool to get source codes and files from workfing dir.
+
+                # 4. FINALLY, determines if code changes is needed with new version of dependencies. Example of code changes needed:
                 - Function arguments and keyed arguments from new library version are updated as well.
 
                 Finally, you need to clearly define the scope of change into stories so other developer

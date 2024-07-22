@@ -33,7 +33,7 @@ def should_continue_changelog(state: MessagesState) -> Literal["changelog_tools"
     return END
 
 # Define the function that determines whether to continue or not
-def should_continue_repo(state: MessagesState) -> Literal["repo_tools", "product_manager_agent", END]:
+def should_continue_repo(state: MessagesState) -> Literal["repo_tools", "product_manager_agent", "senior_developer_agent", END]:
     messages = state['messages']
     last_message = messages[-1]
     if last_message.tool_calls:
@@ -42,8 +42,11 @@ def should_continue_repo(state: MessagesState) -> Literal["repo_tools", "product
     content = last_message.content
     if 'END TURN' in content:
         return "product_manager_agent"
-    # Otherwise, we stop (reply to the user)
-    return END
+
+    if len(messages) > 10:
+        return END
+
+    return "senior_developer_agent"
 
 
 @workflow(name="Langgraph")

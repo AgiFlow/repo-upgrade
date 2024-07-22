@@ -20,7 +20,7 @@ class ProductTeamAgents:
             tools=[
                 Changelog.latest_changes,
             ],
-            allow_delegation=True,
+            allow_delegation=False,
             llm=self.llm,
             verbose=True
         )

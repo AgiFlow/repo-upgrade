@@ -15,14 +15,10 @@ class ProductTeamAgents:
         messages = [
             SystemMessage(
                 content="""
-                You are Lead Developer.
-                Your goal is analysising code base, plan and decide where code change
-                is needed or not.
-                """
-            ),
-            SystemMessage(
-                content="""
-                Analyze the given library changelog: {changelog_url}.
+                You are Lead Developer from big tech.
+                Your goal is analysising code base, plan and decide where code change is needed or not.
+
+                Analyze the given library changelog.
 
                 Focus on identifying important updates which requires
                 code change from the application which are consuming
@@ -57,23 +53,24 @@ class ProductTeamAgents:
         messages = [
             SystemMessage(
                 content="""
-                You are Senior Software Developer.
+                You are Senior Software Developer from big tech.
                 Your goal is analysising code base, decide where code change is needed or not.
-                """
-            ),
-            SystemMessage(
-                content="""
-                From previous changelog summary, analyse codes and dependencies in {working_dir}
-                to determine whether update is neccessary.
 
-                You need to check if dependencies need to be updated first. Example of dependecies upgrade needed:
+                # You MUST only use one tool at a time and perform these steps in sequence:
+
+                # 1. FIRST, check if dependencies need to be upgrade from workfing directory using read_dependencies. Example of dependecies upgrade needed:
                 - Current version is smaller than latest library version
 
-                For each dependency upgrade; check if code changes is needed. Example of code changes needed:
+                # 2. SECOND, filter down dependencies to be upgraded from dependencies information.
                 - Function arguments and keyed arguments from new library version are updated as well.
 
-                Finally, you need to clearly define the scope of change into stories so other developer
-                can implement it easily. Only write stories for packages that requires dependencies upgrade or code changes.
+                # 3. THIRD, from filtered dependencies upgrades, use read_source_codes tools to get source codes and files.
+
+                # 4. FINALLY, determines if code changes is needed with new version of dependencies. Example of code changes needed:
+                - Function arguments and keyed arguments from new library version are updated as well.
+
+                Finally, you need to clearly define the scope of change into stories so other developer can implement it easily.
+                Only write stories for packages that requires dependencies upgrade or code changes.
 
                 Your final summary must include a list of items. Each item includes.
                 - library: library name, no duplication
@@ -105,10 +102,7 @@ class ProductTeamAgents:
                 You are Product Manager.
                 Your goal is providing busines requirements, make decision
                 and prioritise tasks and features..
-                """
-            ),
-            SystemMessage(
-                content="""
+
                 From the stories drafted by developer, prioritize the
                 stories in backlog.
 

@@ -35,10 +35,18 @@ class DeveloperTasks:
                 Get dependencies and codes in {working_dir} directory to determine whether update is neccessary.
 
                 From Changelog Summary (if your product manager doesn't provide it to you, ask him to provide Changelog Summary),
-                you will need to validate whether dependencies needs upgrade
-                or source codes requires change. Example decisions includes:
-                - Current dependencies' version smaller than latest library version
-                - Codes has relevant information from implementation note
+                you will need to validate whether dependencies needs upgrade or source codes requires change.
+
+                # 1. Check if dependencies need to be upgrade. Example of dependecies upgrade needed:
+                - Current version is smaller than latest library version
+
+                # 2. Filter down dependencies to be upgraded from dependencies information.
+                - Function arguments and keyed arguments from new library version are updated as well.
+
+                # 3. From filtered dependencies upgrades.
+
+                # 4. Determines if code changes is needed with new version of dependencies. Example of code changes needed:
+                - Function arguments and keyed arguments from new library version are updated as well.
 
                 Finally, you need to clearly define the scope of change into stories so other developer
                 can implement it easily. Only write stories for packages that requires dependencies upgrade or code changes.
@@ -61,8 +69,7 @@ class ProductManagerTasks:
     def stories_backlog(self, agent):
         return Task(
             description=dedent("""\
-                From the stories drafted by developer, prioritize the
-                stories in backlog.
+                From the stories drafted by developer, prioritize the stories in backlog.
 
                 Focus on identifying high impact update or small wins.
                 Example of high prioritized stories includes:

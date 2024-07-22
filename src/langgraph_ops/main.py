@@ -28,23 +28,26 @@ def should_continue_changelog(state: MessagesState) -> Literal["changelog_tools"
         return "changelog_tools"
 
     content = last_message.content
-    if 'END TURN' in content:
+    if content.endswith('END TURN'):
         return "changelog_summary"
     # Otherwise, we stop (reply to the user)
     return END
 
 # Define the function that determines whether to continue or not
-def should_continue_repo(state: MessagesState) -> Literal["repo_tools", "repo_summary", END]:
+def should_continue_repo(state: MessagesState) -> Literal["repo_tools", "repo_summary", "senior_developer_agent", END]:
     messages = state['messages']
     last_message = messages[-1]
     if last_message.tool_calls:
         return "repo_tools"
 
     content = last_message.content
-    if 'END TURN' in content:
+    if content.endswith('END TURN'):
         return "repo_summary"
-    # Otherwise, we stop (reply to the user)
-    return END
+
+    if len(messages) > 10:
+        return END
+
+    return "senior_developer_agent"
 
 
 def delete_messages(state):
@@ -52,7 +55,7 @@ def delete_messages(state):
     return {"messages": [RemoveMessage(id=m.id) for m in messages[1:-1]]}
 
 
-@workflow(name="Langgraph")
+@workflow(name="Langgraph Ops")
 def run():
     agents = ProductTeamAgents()
     from ..tools import Repo, Changelog
