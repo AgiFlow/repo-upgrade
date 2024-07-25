@@ -5,7 +5,7 @@ class DeveloperTasks:
     def changelog_analysis(self, agent):
         return Task(
             description=dedent("""\
-                Get library changelog from {changelog_url}.
+                Get library changelog from {changelog_url} if you haven't done that.
 
                 Analyze the given changelog information and identify important updates which requires
                 code change from the application which are consuming this library.
@@ -34,9 +34,9 @@ class DeveloperTasks:
             description=dedent("""\
                 Get dependencies and codes in {working_dir} directory to determine whether update is neccessary.
 
-                From Changelog Summary (if your product manager doesn't provide it to you, ask him to provide Changelog Summary),
-                you will need to validate whether dependencies needs upgrade
+                From Changelog Summary, you will need to validate whether dependencies needs upgrade
                 or source codes requires change.
+                NOTE: if your Product Manager doesn't provide it to you, ask him to provide Changelog Summary
 
                 # 1. Check if dependencies need to be upgrade. Example of dependecies upgrade needed:
                 - Current version is smaller than latest library version

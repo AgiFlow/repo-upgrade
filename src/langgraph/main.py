@@ -49,8 +49,7 @@ def should_continue_repo(state: MessagesState) -> Literal["repo_tools", "product
     return "senior_developer_agent"
 
 
-@workflow(name="Langgraph")
-def run():
+def create_app():
     agents = ProductTeamAgents()
     from ..tools import Repo, Changelog
 
@@ -90,7 +89,15 @@ def run():
     checkpointer = MemorySaver()
 
     app = workflow.compile(checkpointer=checkpointer)
+    return app
 
+def visualise():
+    app = create_app()
+    app.get_graph().print_ascii()
+
+@workflow(name="Langgraph")
+def run():
+    app = create_app()
     # Use the Runnable
     final_state = app.invoke(
         {

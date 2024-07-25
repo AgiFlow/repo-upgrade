@@ -22,7 +22,7 @@ product_manager_agent = agents.product_manager()
 developerTasks = DeveloperTasks()
 productManagerTasks = ProductManagerTasks()
 
-@workflow(name="CrewAI Hirarchical")
+@workflow(name="CrewAI Hierarchical")
 def run():
 
     print("## Welcome to the Product Crew")
@@ -36,7 +36,7 @@ def run():
     # Create Crew responsible for Copy
     product_crew = Crew(
         agents=[
-            developer_agent
+            developer_agent,
         ],
         tasks=[
             changelog_analysis,

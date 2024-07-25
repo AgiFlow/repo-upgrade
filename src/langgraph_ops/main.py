@@ -55,8 +55,7 @@ def delete_messages(state):
     return {"messages": [RemoveMessage(id=m.id) for m in messages[1:-1]]}
 
 
-@workflow(name="Langgraph Ops")
-def run():
+def create_app():
     agents = ProductTeamAgents()
     from ..tools import Repo, Changelog
 
@@ -101,6 +100,15 @@ def run():
 
     app = workflow.compile(checkpointer=checkpointer)
 
+    return app
+
+def visualise():
+    app = create_app()
+    app.get_graph().print_ascii()
+
+@workflow(name="Langgraph-Ops")
+def run():
+    app = create_app()
     # Use the Runnable
     final_state = app.invoke(
         {
