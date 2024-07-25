@@ -61,8 +61,6 @@ def create_app():
 
     print("## Welcome to the Product Agents")
     print('-------------------------------')
-    changelog_url = 'https://github.com/langchain-ai/langchain/releases' # input("What is the product website you want a marketing strategy for?\n")
-    working_dir = os.path.join(Path(os.getcwd()).resolve().parent, 'langchain-chatbot')
 
     workflow = StateGraph(MessagesState)
 
@@ -109,6 +107,12 @@ def visualise():
 @workflow(name="Langgraph-Ops")
 def run():
     app = create_app()
+
+    changelog_url = 'https://github.com/langchain-ai/langchain/releases'
+
+    # TODO: change this to your python project directory
+    working_dir = os.path.join(Path(os.getcwd()).resolve().parent, 'langchain-chatbot')
+
     # Use the Runnable
     final_state = app.invoke(
         {

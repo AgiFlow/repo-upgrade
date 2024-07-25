@@ -27,7 +27,10 @@ def run():
 
     print("## Welcome to the Product Crew")
     print('-------------------------------')
-    changelog_url = 'https://github.com/langchain-ai/langchain/releases' # input("What is the product website you want a marketing strategy for?\n")
+    changelog_url = 'https://github.com/langchain-ai/langchain/releases'
+
+    # TODO: change this to your python project directory
+    working_dir = os.path.join(Path(os.getcwd()).resolve().parent, 'langchain-chatbot')
 
     changelog_analysis = developerTasks.changelog_analysis(developer_agent)
     changelog_review = developerTasks.changelog_review(developer_agent)
@@ -50,7 +53,7 @@ def run():
 
     product_update = product_crew.kickoff({
         "changelog_url": changelog_url,
-        "working_dir": os.path.join(Path(os.getcwd()).resolve().parent, 'langchain-chatbot'),
+        "working_dir": working_dir,
     })
 
     # Print results

@@ -1,6 +1,6 @@
 # Repo Upgrade
 
-This project demonstrates a pathway for you to adopt Multi-agents to solve automation tasks. We'll start with blackbox, autonomous multi-agents with CrewAI to autotomate Python repo dependencies upgrade, then explore different methods to optimise the cost and performance using different architecture including Langgraph.  
+This project demonstrates a unique approach for you to adopt Multi-agents to solve automation tasks. We'll start with blackbox, autonomous multi-agents with CrewAI to autotomate Python repo dependencies upgrade, then explore different methods to optimise the cost and performance using different architecture including Langgraph.  
 
 ## Introduction
 To create a robust automation pipeline, we rarely achieve that with single try. If you are a subject matter expert, my recommendation is to start with Workflow and add LLM into the loop to address specific edge cases which takes lots of time to engineer.  
@@ -19,8 +19,8 @@ To get started, follow these steps:
 
 1. Clone the repository:
 ```sh
-git clone https://github.com/AgiFlow/repo-upgrade-agents
-cd agiflow-sdks
+git clone https://github.com/AgiFlow/repo-upgrade
+cd repo-upgrade
 ```
 
 2. Install dependencies:
@@ -40,8 +40,16 @@ playwright install
 cp .env.example .env
 ```
 
-To connect with AGIFlow, set `AGIFLOW_API_KEY` with the api_key acquired from control plane.  
-NOTE: You can run AGIFlow development with docker-compose by `cd dockers/dev`, or sign-up with [AGIFLow's controlplane](https://app.agiflow.io) and get the keys. With docker-compose setup, set additional environment variable  `AGIFLOW_BASE_URL=https://localhost:3000/api/dataplane`.
+To connect with AGIFlow, set `AGIFLOW_API_KEY` with the api_key acquired from control plane via our development server, or sign-up with [AGIFLow's controlplane](https://app.agiflow.io) and get the keys..  
+NOTE: You can run AGIFlow development via our open source repository
+
+``` sh
+git clone https://github.com/AgiFlow/agiflow-sdks
+cd agiflow-sdks
+cd dockers/dev
+docker-compose up
+```
+With docker-compose setup, set additional environment variable  `AGIFLOW_BASE_URL=https://localhost:3000/api/dataplane`.
 
 ## Usage
 
@@ -60,6 +68,11 @@ poetry run crewai-workflow
 3. Langgraph
 ```sh
 poetry run langgraph
+```
+
+4. Langgraph Optimised
+```sh
+poetry run langgraph_ops
 ```
 
 ## License
