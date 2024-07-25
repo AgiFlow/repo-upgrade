@@ -5,7 +5,7 @@ class DeveloperTasks:
     def changelog_analysis(self, agent):
         return Task(
             description=dedent("""\
-                Get library changelog from {changelog_url} if you haven't done that.
+                Get library changelog from {changelog_url}.
 
                 Analyze the given changelog information and identify important updates which requires
                 code change from the application which are consuming this library.
@@ -18,7 +18,8 @@ class DeveloperTasks:
                 """),
             expected_output=dedent(f"""\
                 Your final Changelog Summary must include a list of items and a title.
-                Title: Changelog summary.
+
+                Title: Changelog Summary.
                 Each item includes.
                 - library: library name, no duplication
                 - version: latest version of library string
@@ -32,21 +33,18 @@ class DeveloperTasks:
     def changelog_review(self, agent):
         return Task(
             description=dedent("""\
-                Get dependencies and codes in {working_dir} directory to determine whether update is neccessary.
+                From Changelog Summary provided (if you don't have it, ask Product Manager to provide Changelog Summary from previous task).
+                Now, get dependencies and codes in {working_dir} directory to determine whether update is neccessary.
 
-                From Changelog Summary, you will need to validate whether dependencies needs upgrade
-                or source codes requires change.
-                NOTE: if your Product Manager doesn't provide it to you, ask him to provide Changelog Summary
-
-                # 1. Check if dependencies need to be upgrade. Example of dependecies upgrade needed:
+                Check if dependencies need to be upgrade. Example of dependecies upgrade needed:
                 - Current version is smaller than latest library version
 
-                # 2. Filter down dependencies to be upgraded from dependencies information.
+                Filter down dependencies to be upgraded from dependencies information.
                 - Function arguments and keyed arguments from new library version are updated as well.
 
-                # 3. From filtered dependencies upgrades.
+                From filtered dependencies upgrades.
 
-                # 4. Determines if code changes is needed with new version of dependencies. Example of code changes needed:
+                Determines if code changes is needed with new version of dependencies. Example of code changes needed:
                 - Function arguments and keyed arguments from new library version are updated as well.
 
                 Finally, you need to clearly define the scope of change into stories so other developer
