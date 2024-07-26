@@ -38,6 +38,7 @@ class DeveloperTasks:
 
                 # 1. FIRST, check if dependencies need to be upgrade from workfing directory. Example of dependecies upgrade needed:
                 - Current version is smaller than latest library version
+                - You MUST only update the existing dependencies in repo
 
                 # 2. SECOND, filter down dependencies to be upgraded from dependencies information.
                 - Function arguments and keyed arguments from new library version are updated as well.

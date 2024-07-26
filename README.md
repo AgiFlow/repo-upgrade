@@ -2,6 +2,13 @@
 
 This project demonstrates a unique approach for you to adopt Multi-agents to solve automation tasks. We'll start with blackbox, autonomous multi-agents with CrewAI to autotomate Python repo dependencies upgrade, then explore different methods to optimise the cost and performance using different architecture including Langgraph.  
 
+## Videos
+
+### Part 1: CrewAI
+[<img src="./part_1.png">](https://youtu.be/hvcd8Xjpd7A)
+
+### Upcoming (part 2: Langgraph)
+
 ## Introduction
 To create a robust automation pipeline, we rarely achieve that with single try. If you are a subject matter expert, my recommendation is to start with Workflow and add LLM into the loop to address specific edge cases which takes lots of time to engineer.  
 

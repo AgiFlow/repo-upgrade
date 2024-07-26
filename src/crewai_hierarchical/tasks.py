@@ -38,6 +38,7 @@ class DeveloperTasks:
 
                 Check if dependencies need to be upgrade. Example of dependecies upgrade needed:
                 - Current version is smaller than latest library version
+                - You MUST only update the existing dependencies in repo
 
                 Filter down dependencies to be upgraded from dependencies information.
                 - Function arguments and keyed arguments from new library version are updated as well.
