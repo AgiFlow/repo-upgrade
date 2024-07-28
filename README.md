@@ -7,7 +7,8 @@ This project demonstrates a unique approach for you to adopt Multi-agents to sol
 ### Part 1: CrewAI
 [<img src="./part_1.png">](https://youtu.be/hvcd8Xjpd7A)
 
-### Upcoming (part 2: Langgraph)
+### Part 2: Langgraph
+[<img src="./part_2.png">](https://youtu.be/_k82vx4qaLo)
 
 ## Introduction
 To create a robust automation pipeline, we rarely achieve that with single try. If you are a subject matter expert, my recommendation is to start with Workflow and add LLM into the loop to address specific edge cases which takes lots of time to engineer.  
@@ -60,24 +61,32 @@ With docker-compose setup, set additional environment variable  `AGIFLOW_BASE_UR
 
 ## Usage
 
-To run the automation, execute the following command:
+We want to observe and run automation in sequence to see the difference.
 
-1. CrewAI (autonomous)
+1. CrewAI (hierarchical)
+CrewAI hierarchical process is more autonomous, with Product Manager agent plan and delegate tasks to Developer Agent.  
+
 ```sh
-poetry run crewai-autonomous
+poetry run crewai-hierarchical
 ```
 
-2. CrewAI (workflow)
+2. CrewAI (sequential)
+CrewAI sequential is more predictable, we want Agent to complete its task and pass result to the next agent liked Manufactoring process.  
+
 ```sh
-poetry run crewai-workflow
+poetry run crewai-sequential
 ```
 
 3. Langgraph
+We remove ReAct prompt from agent to make the output more predictable; aiming for 6-llm calls only.  
+
 ```sh
 poetry run langgraph
 ```
 
 4. Langgraph Optimised
+Optimise prompt context by removing intermediate messages from one agent to another.  
+
 ```sh
 poetry run langgraph_ops
 ```
