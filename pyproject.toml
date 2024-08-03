@@ -23,19 +23,21 @@ include = "src"
 python = "<3.13,>=3.10"
 python-dotenv = "^1.0.1"
 litellm = "^1.32.4"
-# agiflow-sdk = "0.0.19"
-agiflow-sdk = { path = "../agiflow-sdks/packages/python/agiflow-sdk", develop = true }
+agiflow-sdk = "0.0.19"
+# agiflow-sdk = { path = "../agiflow-sdks/packages/python/agiflow-sdk", develop = true }
 html2text = "^2024.2.26"
 json5 = "^0.9.25"
 beautifulsoup4 = "^4.12.3"
 playwright = "^1.45.0"
 langgraph = "^0.1.8"
 crewai = "^0.36.1"
-langchain = "^0.2.7"
-langchain-community = "^0.2.7"
-langchain-openai = "^0.1.17"
+langchain = "^0.2.12"
+langchain-community = "^0.2.11"
+langchain-openai = "^0.1.20"
 jupyter = "^1.0.0"
 langchain-core = "^0.2.23"
+# langchain-experimental = "^0.0.64"
+# langchain-experimental = { git = "https://github.com/langchain-ai/langchain.git", subdirectory = "libs/experimental"  }
 
 [tool.poetry.group.dev.dependencies]
 autopep8 = "2.0.4"

@@ -1,6 +1,6 @@
 from functools import lru_cache
 from langchain_community.chat_models.azure_openai import AzureChatOpenAI as CommunityAzureChatOpenAI
-from langchain.llms import Ollama
+from langchain_community.chat_models.ollama import ChatOllama
 from langchain_openai import ChatOpenAI, AzureChatOpenAI
 import os
 from dotenv import load_dotenv
@@ -54,8 +54,10 @@ class Models:
     @lru_cache
     @staticmethod
     def ollama():
-        return Ollama(
-            model=os.environ.get('OLLAMA_MODEL')
+        # NOTE: function calling does not work yet
+        return ChatOllama(
+            model=os.environ.get('OLLAMA_MODEL'),
+            raw=True
         )
 
     @lru_cache

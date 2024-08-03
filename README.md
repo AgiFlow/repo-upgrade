@@ -2,6 +2,8 @@
 
 This project demonstrates a unique approach for you to adopt Multi-agents to solve automation tasks. We'll start with blackbox, autonomous multi-agents with CrewAI to autotomate Python repo dependencies upgrade, then explore different methods to optimise the cost and performance using different architecture including Langgraph.  
 
+[Discord](https://discord.gg/vejg6tkBUu) | [Newsletter](https://mailchi.mp/agiflow/agiflow-sub) | [Observability](https://github.com/AgiFlow/agiflow-sdks)
+
 ## Videos
 
 ### Part 1: CrewAI

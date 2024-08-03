@@ -27,7 +27,7 @@ def should_continue_changelog(state: MessagesState) -> Literal["changelog_tools"
         return "changelog_tools"
 
     content = last_message.content
-    if 'END TURN' in content:
+    if content.endswith('END TURN') or content.endswith('END TURN**'):
         return "senior_developer_agent"
     # Otherwise, we stop (reply to the user)
     return END
@@ -40,7 +40,7 @@ def should_continue_repo(state: MessagesState) -> Literal["repo_tools", "product
         return "repo_tools"
 
     content = last_message.content
-    if 'END TURN' in content:
+    if content.endswith('END TURN') or content.endswith('END TURN**'):
         return "product_manager_agent"
 
     if len(messages) > 10:

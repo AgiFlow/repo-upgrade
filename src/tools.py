@@ -49,7 +49,7 @@ class Changelog():
         url = url.replace('"', '')
         with sync_playwright() as playwright:
             chromium = playwright.chromium
-            browser = chromium.launch(headless=False)
+            browser = chromium.launch(headless=True)
             context = browser.new_context()
             page = context.new_page()
             page.goto(url)  # Navigate to the old url
