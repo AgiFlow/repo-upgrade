@@ -1,6 +1,6 @@
 import json
 from langgraph.graph import MessagesState
-from langchain_core.messages import SystemMessage, ToolMessage
+from langchain_core.messages import SystemMessage, ToolMessage, AIMessage
 from agiflow.opentelemetry import agent
 from ..tools import Repo, Changelog
 from ..models import Models
@@ -65,7 +65,6 @@ class ProductTeamAgents:
 
                 # 1. FIRST, check if dependencies need to be upgrade from workfing directory using read_dependencies. Example of dependecies upgrade needed:
                 - Current version is smaller than latest library version
-                - You MUST only update the existing dependencies in repo
 
                 # 2. SECOND, filter down dependencies to be upgraded from dependencies information.
                 - Function arguments and keyed arguments from new library version are updated as well.

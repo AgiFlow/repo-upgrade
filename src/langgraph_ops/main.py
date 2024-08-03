@@ -21,17 +21,21 @@ Agiflow.init(
 )
 
 # Define the function that determines whether to continue or not
-def should_continue_changelog(state: MessagesState) -> Literal["changelog_tools", "changelog_summary", END]:
+def should_continue_changelog(state: MessagesState) -> Literal["changelog_tools", "changelog_summary", "lead_developer_agent", END]:
     messages = state['messages']
     last_message = messages[-1]
     if last_message.tool_calls:
         return "changelog_tools"
 
     content = last_message.content
-    if content.endswith('END TURN'):
+    if content.endswith('END TURN') or content.endswith('END TURN**'):
         return "changelog_summary"
-    # Otherwise, we stop (reply to the user)
-    return END
+
+    if len(messages) > 4:
+        return END
+
+    return "lead_developer_agent"
+
 
 # Define the function that determines whether to continue or not
 def should_continue_repo(state: MessagesState) -> Literal["repo_tools", "repo_summary", "senior_developer_agent", END]:
@@ -41,7 +45,7 @@ def should_continue_repo(state: MessagesState) -> Literal["repo_tools", "repo_su
         return "repo_tools"
 
     content = last_message.content
-    if content.endswith('END TURN'):
+    if content.endswith('END TURN') or content.endswith('END TURN**'):
         return "repo_summary"
 
     if len(messages) > 10:
